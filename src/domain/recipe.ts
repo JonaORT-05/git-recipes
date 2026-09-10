@@ -1,9 +1,11 @@
 export class Recipe {
   _name!: string;
   _category?: string;
+  _time!: number;
 
-  constructor(aName: string) {
+  constructor(aName: string, aTime: number) {
     this.name = aName;
+    this.time = aTime;
   }
 
   get name(): string {
@@ -18,6 +20,17 @@ export class Recipe {
     this._name = trimmed;
   }
 
+  get time(): number {
+    return this._time;
+  }
+
+  set time(aTime: number) {
+    if (aTime < 0) {
+      throw new Error("El tiempo de la receta no puede ser negativo.");
+    }
+    this._time = aTime;
+  }
+
   get category(): string | undefined {
     return this._category;
   }
@@ -27,6 +40,6 @@ export class Recipe {
   }
 
   toString(): string {
-    return `Receta: ${this.name} - categoría: ${this.category}`;
+    return `Receta: ${this.name} - Tiempo: ${this.time} - Categoría: ${this.category}`;
   }
 }
